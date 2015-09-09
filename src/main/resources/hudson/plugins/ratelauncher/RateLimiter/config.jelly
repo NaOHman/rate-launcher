@@ -1,0 +1,11 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
+        xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry title="${%Max Slaves in Label}" field="maxSlaves" name="maxSlaves" help="/plugin/rate-launcher/help-ratelimiter-retention.html">
+        <f:number clazz="required number" min="0" value="${instance.maxSlaves}"
+            name="rateLimiter.maxSlaves"/>
+    </f:entry>
+    <f:entry title="${%Label}" field="label">
+        <f:textbox />
+    </f:entry>
+</j:jelly>
