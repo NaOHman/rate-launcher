@@ -43,9 +43,12 @@ public class RateLimiter extends RetentionStrategy<SlaveComputer> {
 
     @Override
     @GuardedBy("hudson.model.Queue.lock")
-    public long check(SlaveComputer vm) {
-        if (vm.isOffline() && hasUniqueJob(vm) && countLabel(label) < maxSlaves){
-            vm.connect(false);
+    public long check(SlaveComputer comp) {
+        if (comp.isOffline() && hasUniqueJob(comp) && countLabel(label) < maxSlaves){
+            comp.connect(false);
+        }
+        if (comp.isOnline() && comp.isIdle() && !hasUniqueJob(comp)){
+            comp.disconnect(null);
         }
         return 1;
     }
